@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Roboto } from "next/font/google";
+
+// Note: this should be TT Norms Pro
+const roboto = Roboto({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
   title: "Health quiz",
@@ -12,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-gb">
+    <html lang="en-gb" className={`${roboto.variable}`}>
       <body>{children}</body>
     </html>
   );
