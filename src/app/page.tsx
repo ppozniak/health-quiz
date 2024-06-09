@@ -33,6 +33,7 @@ export default function Home() {
   return (
     <>
       <main>
+        {/* @TODO: Extract this to page header. Put in layout? */}
         <header className="bg-olive py-2">
           <div className="container">
             <Link
@@ -51,7 +52,7 @@ export default function Home() {
           description="We're working around the clock to bring you a holistic
                   approach to your wellness. From top to bottom, inside and out."
           ctaTitle="Take the quiz"
-          ctaHref="#"
+          ctaHref="/quiz/972423"
         >
           <div className="mx-auto mt-3 max-w-[400px] md:-mt-[200px] md:translate-x-2/3 lg:m-0 lg:ml-auto lg:mt-4 lg:max-w-[600px] lg:translate-x-0 lg:self-end">
             <Image
@@ -68,6 +69,12 @@ export default function Home() {
           <h2 className="my-5 text-center text-lg">What we can help with</h2>
 
           <SectionList items={ITEMS} />
+
+          <div className="my-4 text-center">
+            <Link href="/quiz/972423" className="btn-primary">
+              Take the quiz
+            </Link>
+          </div>
         </section>
       </main>
 
