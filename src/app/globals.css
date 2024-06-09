@@ -7,3 +7,9 @@
     @apply text-green;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply bg-crimson focus:bg-crimsonDark hover:bg-crimsonDark inline-block px-2 py-[15px] text-center text-xs uppercase text-white transition-colors;
+  }
+}

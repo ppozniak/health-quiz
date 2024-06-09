@@ -11,12 +11,13 @@ const config: Config = {
       sans: ["var(--font-roboto)", "sans-serif"],
     },
     spacing: {
+      "0": "0",
       "1": "20px",
       "2": "30px",
       "3": "36px",
     },
     fontSize: {
-      xl: "5.625rem",
+      xl: ["5.625rem", "1"],
       lg: "2.5rem",
       md: "1.75rem",
       base: "1.125rem",
@@ -28,6 +29,8 @@ const config: Config = {
       olive: "#A5B8A0",
       lightOlive: "#E8EFE9",
       crimson: "#7E0707",
+      crimsonDark: "#710606",
+      white: "#fff",
     },
     container: {
       center: true,
