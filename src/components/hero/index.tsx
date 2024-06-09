@@ -21,14 +21,14 @@ export default function Hero({
   return (
     <section
       {...rest}
-      className="bg-olive overflow-hidden lg:-mt-3 lg:flex lg:min-h-[750px] lg:flex-col"
+      className="bg-olive overflow-hidden lg:-mt-4 lg:flex lg:min-h-[750px] lg:flex-col"
     >
       <div className="container lg:flex lg:flex-1">
         {/* Content */}
-        <div className="max-w-prose text-balance md:pt-3 lg:self-center lg:pt-0">
-          <h1 className="mb-1 text-balance text-lg md:text-xl">{title}</h1>
+        <div className="max-w-prose text-balance md:pt-4 lg:self-center lg:pt-0">
+          <h1 className="mb-2 text-balance text-lg md:text-xl">{title}</h1>
 
-          <p className="mb-3">{description}</p>
+          <p className="mb-4">{description}</p>
 
           {!!ctaHref && !!ctaTitle && (
             <div>

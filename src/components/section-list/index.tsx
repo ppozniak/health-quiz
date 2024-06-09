@@ -19,10 +19,10 @@ export default function SectionList({ items }: SectionListProps) {
       {items.map(({ title, heading, description, imgSrc }) => (
         <li
           key={title}
-          className="section-list__item group mx-auto mb-2 max-w-[370px] pb-2 md:max-w-none md:py-4"
+          className="section-list__item group mx-auto mb-3 max-w-[370px] pb-3 md:max-w-none md:py-5"
         >
-          <div className="container group-even:flex-row-reverse md:relative md:flex md:gap-2 lg:max-w-[870px]">
-            <div className="relative z-10 mx-auto mb-1 flex-shrink-0 md:m-0">
+          <div className="container group-even:flex-row-reverse md:relative md:flex md:gap-3 lg:max-w-[870px]">
+            <div className="relative z-10 mx-auto mb-2 flex-shrink-0 md:m-0">
               <Image
                 width={370}
                 height={445}
@@ -33,10 +33,10 @@ export default function SectionList({ items }: SectionListProps) {
             </div>
 
             <div className="max-w-prose text-balance">
-              <h3 className="text-blueSmoke section-list__title mb-1 text-xs uppercase">
+              <h3 className="text-blueSmoke section-list__title mb-2 text-xs uppercase">
                 {title}
               </h3>
-              <p className="text-md mb-1">{heading}</p>
+              <p className="text-md mb-2">{heading}</p>
               <p className="">{description}</p>
             </div>
           </div>
