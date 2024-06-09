@@ -15,11 +15,12 @@ const config: Config = {
       "1": "20px",
       "2": "30px",
       "3": "36px",
+      "4": "70px",
     },
     fontSize: {
       xl: ["5.625rem", "1"],
-      lg: "2.5rem",
-      md: "1.75rem",
+      lg: ["2.5rem", "1.1"],
+      md: ["1.75rem", "1.2"],
       base: "1.125rem",
       sm: "1rem",
       xs: "0.625rem",
@@ -27,6 +28,7 @@ const config: Config = {
     colors: {
       green: "#0B3B3C",
       olive: "#A5B8A0",
+      blueSmoke: "#6D8A83",
       lightOlive: "#E8EFE9",
       crimson: "#7E0707",
       crimsonDark: "#710606",

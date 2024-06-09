@@ -1,0 +1,17 @@
+.section-list {
+  counter-reset: section-list;
+}
+
+.section-list__item {
+  counter-increment: section-list;
+}
+
+.section-list__title::before {
+  content: counter(section-list, decimal-leading-zero);
+  line-height: 1;
+  @apply mr-1;
+  @apply md:absolute md:bottom-0 md:m-0 md:text-[300px] md:font-bold md:opacity-10;
+  @apply lg:text-[450px];
+  @apply lg:group-odd:right-0;
+  @apply lg:group-even:left-0;
+}
