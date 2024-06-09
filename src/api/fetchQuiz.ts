@@ -1,19 +1,36 @@
-import { ReactElement } from "react";
+// Note: one for now, but can be more
+type QuestionType = "ChoiceType";
 
-export type QuizType = "ChoiceType";
-
-export type QuizQuestion = {
+/**
+ * A single quiz question. Its `type` dictates type of the options
+ */
+type QuizQuestion = {
   question: string;
-  type: QuizType;
-  options: ReactElement[]; // @TODO: Think this is actually just a string
+  type: QuestionType;
+  options: QuizOption<QuestionType>[];
+};
+
+type QuizOption<T extends QuestionType> = QuizOptionMap[T];
+
+/**
+ * A mapping of quiz type: list of options
+ */
+type QuizOptionMap = {
+  ChoiceType: {
+    display: string; // Note: This stores html strings
+    value: string | boolean | number;
+    isRejection: boolean;
+  };
+};
+
+export type Quiz = {
+  questions: QuizQuestion[];
 };
 
 // Note: in real life, this would be probably fetched
 export const QUIZ_IDS: string[] = ["972423"] as const;
 
-export async function fetchQuiz(
-  id: string,
-): Promise<{ questions: QuizQuestion[] }> {
+export async function fetchQuiz(id: string): Promise<Quiz> {
   const response = await fetch(
     `https://manual-case-study.herokuapp.com/questionnaires/${id}.json`,
   );
