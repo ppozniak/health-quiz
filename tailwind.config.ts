@@ -39,6 +39,15 @@ const config: Config = {
       center: true,
       padding: "2rem",
     },
+    animation: {
+      "fade-in": "fade-in .5s ease-out",
+    },
+    keyframes: {
+      "fade-in": {
+        "0%": { opacity: "0" },
+        "100%": { opacity: "1" },
+      },
+    },
   },
   plugins: [],
 };

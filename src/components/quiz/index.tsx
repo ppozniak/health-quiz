@@ -2,9 +2,10 @@
 import { Quiz } from "@/api/fetchQuiz";
 import { useState } from "react";
 import { Question } from "./question";
+import { useRouter } from "next/navigation";
 
-// @TODO: Horrible rerendering
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
+  const router = useRouter();
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   // @TODO: Not sure about isRejected = undefined
@@ -36,7 +37,9 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   };
 
   const handlePrevious = () => {
-    if (isRejected !== undefined) {
+    if (isFirstQuestion) {
+      router.back();
+    } else if (isRejected !== undefined) {
       resetOutcome();
     } else {
       setActiveQuestionIndex((active) => active - 1);
@@ -64,35 +67,35 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   };
 
   return (
-    <div>
+    <div className="container py-3">
       {isRejected === undefined && (
-        <Question
-          value={answers[activeQuestionIndex]}
-          onSelect={handleSelect}
-          question={quiz.questions[activeQuestionIndex]}
-        />
+        <div className="animate-fade-in" key={activeQuestionIndex}>
+          <Question
+            value={answers[activeQuestionIndex]}
+            onSelect={handleSelect}
+            question={quiz.questions[activeQuestionIndex]}
+          />
+        </div>
       )}
 
       {isRejected === true && "You cannot, sorry"}
 
       {isRejected === false && "You can, yes"}
 
-      <button
-        className="btn-primary"
-        onClick={handlePrevious}
-        disabled={isFirstQuestion}
-      >
-        Previous
-      </button>
-      {isRejected === undefined && (
-        <button
-          className="btn-primary"
-          disabled={!isValueSelected}
-          onClick={handleNext}
-        >
-          {isLastQuestion ? "Finish" : "Next"}
+      <div className="mt-2 flex justify-between">
+        <button className="btn-secondary" onClick={handlePrevious}>
+          {isFirstQuestion ? "Exit" : "Previous"}
         </button>
-      )}
+        {isRejected === undefined && (
+          <button
+            className="btn-primary"
+            disabled={!isValueSelected}
+            onClick={handleNext}
+          >
+            {isLastQuestion ? "Finish" : "Next"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

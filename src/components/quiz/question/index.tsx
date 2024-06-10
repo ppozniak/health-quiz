@@ -30,10 +30,10 @@ export function Question({
 
   return (
     <div>
-      <h1>{question}</h1>
+      <h1 className="mb-2 text-md">{question}</h1>
       {options.map((option, index) => (
         <OptionComponent
-          key={String(option.value)}
+          key={question + index}
           option={option}
           name={question}
           value={value}

@@ -10,8 +10,12 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-crimson focus:bg-crimsonDark hover:bg-crimsonDark inline-block px-3 py-1 text-center text-xs uppercase text-white transition-colors;
+    @apply inline-block bg-crimson px-3 py-1 text-center text-xs uppercase text-white transition-colors hover:bg-crimsonDark focus:bg-crimsonDark;
 
-    @apply disabled:bg-blueSmoke disabled:cursor-not-allowed disabled:opacity-60;
+    @apply disabled:cursor-not-allowed disabled:bg-blueSmoke disabled:opacity-60;
+  }
+
+  .btn-secondary {
+    @apply inline-block border border-blueSmoke px-3 py-1 text-center text-xs uppercase text-blueSmoke opacity-100 transition-colors hover:opacity-70 focus:opacity-70;
   }
 }
