@@ -1,9 +1,9 @@
 import { QuizOptionMap } from "@/api/fetchQuiz";
 import { useId } from "react";
 
-import { QuestionOptionProp } from "./question";
+import { CommonOptionProps } from "./types";
 
-interface ChoiceTypeQuestionProps extends QuestionOptionProp {
+interface ChoiceTypeQuestionProps extends CommonOptionProps {
   option: QuizOptionMap["ChoiceType"];
   name: string;
 }
@@ -19,7 +19,7 @@ export function ChoiceTypeOption({
     <div>
       <label
         htmlFor={inputId}
-        // @TODO: Ensure it's safe
+        // @TODO: It should be safe, as its coming from trusted server, but could use DOMpurify or other just to be extra safe
         dangerouslySetInnerHTML={{ __html: option.display }}
       ></label>
       <input

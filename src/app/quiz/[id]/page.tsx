@@ -1,5 +1,5 @@
 import { QUIZ_IDS, fetchQuiz } from "@/api/fetchQuiz";
-import { QuizFlow } from "@/components/quiz/quiz";
+import { QuizFlow } from "@/components/quiz";
 import { notFound } from "next/navigation";
 
 type QuizPageParams = {
@@ -22,5 +22,5 @@ export default async function Quiz({ params }: { params: QuizPageParams }) {
     notFound();
   }
 
-  return <QuizFlow quiz={quiz} id={params.id} />;
+  return <QuizFlow quiz={quiz} />;
 }

@@ -1,20 +1,13 @@
 "use client";
 import { QuestionType, QuizQuestion } from "@/api/fetchQuiz";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 
 import { ChoiceTypeOption } from "./choice-type";
-
-// @TODO: Rename and move
-export interface QuestionOptionProp {
-  option: any; // @TODO Wah wah
-  name: string;
-  value?: string;
-  onSelect: (value: string) => void;
-}
+import { CommonOptionProps } from "./types";
 
 const QUESTION_TYPE_TO_OPTION_COMPONENT: Record<
   QuestionType,
-  FC<QuestionOptionProp>
+  FC<CommonOptionProps>
 > = {
   ChoiceType: ChoiceTypeOption,
 };
@@ -30,16 +23,17 @@ export function Question({
   onSelect,
   question: { question, options, type },
 }: QuestionProps) {
-  const OptionComponent = QUESTION_TYPE_TO_OPTION_COMPONENT[type];
-
-  console.log(question, value);
+  const OptionComponent = useMemo(
+    () => QUESTION_TYPE_TO_OPTION_COMPONENT[type],
+    [type],
+  );
 
   return (
     <div>
       <h1>{question}</h1>
       {options.map((option, index) => (
         <OptionComponent
-          key={index}
+          key={String(option.value)}
           option={option}
           name={question}
           value={value}

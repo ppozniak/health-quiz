@@ -1,8 +1,9 @@
 "use client";
 import { Quiz } from "@/api/fetchQuiz";
 import { useState } from "react";
-import { Question } from "./question/question";
+import { Question } from "./question";
 
+// @TODO: Horrible rerendering
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -18,10 +19,9 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const handleFinish = () => {
     const questionAnswers = answers.map((answer, index) => {
       const options = quiz.questions[index].options;
-      const selectedOption = options.find((option) => {
-        console.log(option.value, answer);
-        return String(option.value) === answer;
-      });
+      const selectedOption = options.find(
+        (option) => String(option.value) === answer,
+      );
 
       return selectedOption;
     });
