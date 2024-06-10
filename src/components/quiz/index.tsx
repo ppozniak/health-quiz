@@ -5,21 +5,26 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Quiz } from "@/api/fetchQuiz";
+import { useQuiz } from "@/hooks/use-quiz";
 import { getRejectionFromAnswers } from "@/utils/quiz";
 
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const router = useRouter();
-  // @TODO: Separate hook for that?
+  const {
+    answers,
+    isFirstQuestion,
+    isLastQuestion,
+    isValueSelected,
+    addAnswer,
+    nextQuestion,
+    previousQuestion,
+    activeQuestionIndex,
+  } = useQuiz(quiz);
+
   const [currentStep, setCurrentStep] = useState<"QUESTION" | "FINISH">(
     "QUESTION",
   );
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
   const [isRejected, setIsRejected] = useState(false);
-
-  const isFirstQuestion = activeQuestionIndex === 0;
-  const isLastQuestion = activeQuestionIndex === quiz.questions.length - 1;
-  const isValueSelected = !!answers[activeQuestionIndex];
 
   const handleFinish = () => {
     // @TODO: This assumes all quizzes use `isRejection` as a way to resolve quiz's outcome
@@ -28,33 +33,25 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
     setCurrentStep("FINISH");
   };
 
-  const handlePrevious = () => {
+  const handlePreviousClick = () => {
     if (isFirstQuestion) {
       router.back();
     } else if (currentStep === "FINISH") {
       setCurrentStep("QUESTION");
     } else {
-      setActiveQuestionIndex((active) => active - 1);
+      previousQuestion();
     }
   };
 
-  const handleNext = () => {
+  const handleNextClick = () => {
     if (!isLastQuestion) {
-      setActiveQuestionIndex((active) => active + 1);
+      nextQuestion();
     } else {
       handleFinish();
     }
   };
 
-  const addAnswer = (index: number, value: string) => {
-    setAnswers((answers) => {
-      const newAnswers = [...answers];
-      newAnswers[index] = value;
-      return newAnswers;
-    });
-  };
-
-  const handleSelect = (value: string) => {
+  const handleSelectAnswer = (value: string) => {
     addAnswer(activeQuestionIndex, value);
   };
 
@@ -64,7 +61,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
         <div className="animate-fade-in" key={activeQuestionIndex}>
           <Question
             value={answers[activeQuestionIndex]}
-            onSelect={handleSelect}
+            onSelect={handleSelectAnswer}
             question={quiz.questions[activeQuestionIndex]}
           />
         </div>
@@ -87,6 +84,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
                 href="http://www.example.com"
                 target="_blank"
                 className="underline"
+                referrerPolicy="no-referrer"
               >
                 www.example.com
               </a>
@@ -97,7 +95,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
       )}
 
       <div className="mt-2 flex justify-between md:justify-start md:gap-2">
-        <button className="btn-secondary" onClick={handlePrevious}>
+        <button className="btn-secondary" onClick={handlePreviousClick}>
           {isFirstQuestion ? "Exit" : "Previous"}
         </button>
 
@@ -105,7 +103,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
           <button
             className="btn-primary"
             disabled={!isValueSelected}
-            onClick={handleNext}
+            onClick={handleNextClick}
           >
             {isLastQuestion ? "Finish" : "Next"}
           </button>
