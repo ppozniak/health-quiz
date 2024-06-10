@@ -37,7 +37,6 @@ export function Question({
   return (
     <div>
       <h1>{question}</h1>
-      Before you selected: {value}
       {options.map((option, index) => (
         <OptionComponent
           key={index}
