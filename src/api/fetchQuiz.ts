@@ -1,10 +1,10 @@
 // Note: one for now, but can be more
-type QuestionType = "ChoiceType";
+export type QuestionType = "ChoiceType";
 
 /**
  * A single quiz question. Its `type` dictates type of the options
  */
-type QuizQuestion = {
+export type QuizQuestion = {
   question: string;
   type: QuestionType;
   options: QuizOption<QuestionType>[];
@@ -15,7 +15,7 @@ type QuizOption<T extends QuestionType> = QuizOptionMap[T];
 /**
  * A mapping of quiz type: list of options
  */
-type QuizOptionMap = {
+export type QuizOptionMap = {
   ChoiceType: {
     display: string; // Note: This stores html strings
     value: string | boolean | number;

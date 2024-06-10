@@ -1,4 +1,5 @@
 import { QUIZ_IDS, fetchQuiz } from "@/api/fetchQuiz";
+import { QuizFlow } from "@/components/quiz/quiz";
 import { notFound } from "next/navigation";
 
 type QuizPageParams = {
@@ -21,28 +22,5 @@ export default async function Quiz({ params }: { params: QuizPageParams }) {
     notFound();
   }
 
-  return (
-    <div>
-      Quiz ID: {params.id}
-      {quiz.questions.map((question, index) => (
-        // Note: Questions should probably have ids
-        <div key={index}>
-          {question.question}
-
-          <div>{question.type}</div>
-          <div>
-            {question.options.map((option, index) => {
-              console.log(option);
-              return <div key={index}>Hi</div>;
-            })}
-          </div>
-          {/* <div>
-            {question.options.map((option) => (
-              <div key={option}>{option}</div>
-            ))}
-          </div> */}
-        </div>
-      ))}
-    </div>
-  );
+  return <QuizFlow quiz={quiz} />;
 }
