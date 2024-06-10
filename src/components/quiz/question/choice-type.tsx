@@ -30,6 +30,7 @@ export function ChoiceTypeOption({
         className="flex-1 py-2"
         htmlFor={inputId}
         key={String(option.value)}
+        // @TODO: Could be worth safe parsing it for extra security
         dangerouslySetInnerHTML={{ __html: option.display }}
       ></label>
     </div>

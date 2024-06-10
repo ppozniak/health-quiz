@@ -22,13 +22,7 @@ export default function SectionList({ items }: SectionListProps) {
         >
           <div className="container group-even:flex-row-reverse md:relative md:flex md:gap-3 lg:max-w-[870px]">
             <div className="relative z-10 mx-auto mb-2 flex-shrink-0 md:m-0">
-              <Image
-                width={370}
-                height={445}
-                className=""
-                alt=""
-                src={imgSrc}
-              />
+              <Image width={370} height={445} alt="" src={imgSrc} />
             </div>
 
             <div className="max-w-prose text-balance">
@@ -36,7 +30,7 @@ export default function SectionList({ items }: SectionListProps) {
                 {title}
               </h3>
               <p className="mb-2 text-md">{heading}</p>
-              <p className="">{description}</p>
+              <p>{description}</p>
             </div>
           </div>
         </li>

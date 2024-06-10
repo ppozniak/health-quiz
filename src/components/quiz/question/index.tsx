@@ -25,6 +25,7 @@ export function Question({
   question: { question, options, type },
 }: QuestionProps) {
   const OptionComponent = QUESTION_TYPE_TO_OPTION_COMPONENT[type];
+  // @TODO: No error handling for unexpected `type`
 
   return (
     <div className="animate-fade-in" key={question}>

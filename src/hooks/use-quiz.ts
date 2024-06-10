@@ -20,6 +20,7 @@ export function useQuiz(quiz: Quiz) {
   };
 
   const nextQuestion = () => {
+    // @TODO: Could add condition to prevent going off bounds
     setActiveQuestionIndex((active) => active + 1);
   };
 
