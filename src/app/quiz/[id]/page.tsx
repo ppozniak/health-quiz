@@ -22,5 +22,5 @@ export default async function Quiz({ params }: { params: QuizPageParams }) {
     notFound();
   }
 
-  return <QuizFlow quiz={quiz} />;
+  return <QuizFlow quiz={quiz} id={params.id} />;
 }

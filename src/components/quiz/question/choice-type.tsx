@@ -8,7 +8,12 @@ interface ChoiceTypeQuestionProps extends QuestionOptionProp {
   name: string;
 }
 
-export function ChoiceTypeOption({ option, name }: ChoiceTypeQuestionProps) {
+export function ChoiceTypeOption({
+  option,
+  name,
+  value,
+  onSelect,
+}: ChoiceTypeQuestionProps) {
   const inputId = useId();
   return (
     <div>
@@ -21,6 +26,8 @@ export function ChoiceTypeOption({ option, name }: ChoiceTypeQuestionProps) {
         id={inputId}
         name={name}
         type="radio"
+        checked={String(value) === String(option.value)}
+        onChange={(event) => onSelect(event.target.value)}
         value={String(option.value)}
       />
     </div>

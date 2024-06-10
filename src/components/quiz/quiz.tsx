@@ -7,36 +7,57 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
 
-  const handleNextQuestion = (selectedValue: string) => {
-    // 1. Set answer
+  console.log(answers);
+
+  const isFirstQuestion = activeQuestionIndex === 0;
+  const isLastQuestion = activeQuestionIndex === quiz.questions.length - 1;
+  const isValueSelected = !!answers[activeQuestionIndex];
+
+  const handlePrevious = () => {
+    setActiveQuestionIndex((active) => active - 1);
+  };
+
+  const handleNext = () => {
+    if (!isLastQuestion) {
+      setActiveQuestionIndex((active) => active + 1);
+    } else {
+      // @TODO: Handle summary
+    }
+  };
+
+  const addAnswer = (index: number, value: string) => {
     setAnswers((answers) => {
       const newAnswers = [...answers];
-      newAnswers[activeQuestionIndex] = selectedValue;
+      newAnswers[index] = value;
       return newAnswers;
     });
+  };
 
-    // 2. Move forward
-    if (activeQuestionIndex !== quiz.questions.length - 1) {
-      setActiveQuestionIndex((currentIndex) => currentIndex + 1);
-    } else {
-      // @TODO: Handle logic for the last question
-    }
+  const handleSelect = (value: string) => {
+    addAnswer(activeQuestionIndex, value);
   };
 
   return (
     <div>
       <Question
-        defaultValue={answers[activeQuestionIndex]}
+        value={answers[activeQuestionIndex]}
+        onSelect={handleSelect}
         question={quiz.questions[activeQuestionIndex]}
       />
 
-      {/* @TODO: logic for button disable states */}
-      <button className="btn-primary">Previous</button>
       <button
         className="btn-primary"
-        onClick={() => handleNextQuestion("true")}
+        onClick={handlePrevious}
+        disabled={isFirstQuestion}
       >
-        Next
+        Previous
+      </button>
+      <button
+        className="btn-primary"
+        disabled={!isValueSelected}
+        onClick={handleNext}
+      >
+        {isLastQuestion ? "Finish" : "Next"}
       </button>
     </div>
   );
