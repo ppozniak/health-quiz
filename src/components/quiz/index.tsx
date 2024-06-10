@@ -80,9 +80,29 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
         </div>
       )}
 
-      {isRejected === true && "You cannot, sorry"}
+      {isRejected === true && (
+        <div className="max-w-prose">
+          Unfortunately, we are unable to prescribe this medication for you.
+          This is because finasteride can alter the PSA levels, which may be
+          used to monitor for cancer. You should discuss this further with your
+          GP or specialist if you would still like this medication.
+        </div>
+      )}
 
-      {isRejected === false && "You can, yes"}
+      {isRejected === false && (
+        <div>
+          Great news! We have the perfect treatment for your hair loss. Proceed
+          to{" "}
+          <a
+            href="http://www.example.com"
+            target="_blank"
+            className="underline"
+          >
+            www.example.com
+          </a>
+          , and prepare to say hello to your new hair!
+        </div>
+      )}
 
       <div className="mt-2 flex justify-between">
         <button className="btn-secondary" onClick={handlePrevious}>
