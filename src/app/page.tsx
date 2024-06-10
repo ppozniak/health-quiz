@@ -1,16 +1,14 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
-import feelsGoodMan from "@public/feels-good-man.png";
-import logo from "@public/logo.png";
 import Hero from "@/components/hero";
+import PageFooter from "@/components/page-footer";
 import SectionList, { SectionListItem } from "@/components/section-list";
 
 import balding from "@public/balding.png";
+import feelsGoodMan from "@public/feels-good-man.png";
+import logo from "@public/logo.png";
 import manSmiling from "@public/smile.png";
-import PageFooter from "@/components/page-footer";
-
-// @TODO: prettier import order plugin
 
 const ITEMS: SectionListItem[] = [
   {

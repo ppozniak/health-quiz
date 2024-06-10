@@ -1,6 +1,7 @@
+import { notFound } from "next/navigation";
+
 import { QUIZ_IDS, fetchQuiz } from "@/api/fetchQuiz";
 import { QuizFlow } from "@/components/quiz";
-import { notFound } from "next/navigation";
 
 type QuizPageParams = {
   id: string;

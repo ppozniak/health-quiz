@@ -1,8 +1,10 @@
 "use client";
-import { Quiz } from "@/api/fetchQuiz";
-import { useState } from "react";
+
 import { Question } from "./question";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { Quiz } from "@/api/fetchQuiz";
 
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const router = useRouter();

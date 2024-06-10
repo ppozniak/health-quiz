@@ -17,7 +17,6 @@ export default function Hero({
   children,
   ...rest
 }: HeroProps) {
-  // @TODO: Merging styles
   return (
     <section
       className="overflow-hidden bg-olive lg:-mt-4 lg:flex lg:min-h-[750px] lg:flex-col"

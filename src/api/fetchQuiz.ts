@@ -10,7 +10,7 @@ export type QuizQuestion = {
   options: QuizOption<QuestionType>[];
 };
 
-type QuizOption<T extends QuestionType> = QuizOptionMap[T];
+export type QuizOption<T extends QuestionType> = QuizOptionMap[T];
 
 /**
  * A mapping of quiz type: list of options

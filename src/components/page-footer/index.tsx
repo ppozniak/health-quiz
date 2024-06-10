@@ -1,10 +1,10 @@
 import Image from "next/image";
-import logo from "@public/logo.png";
 import Link from "next/link";
 
 import facebookIcon from "@public/icons/facebook.svg";
-import twitterIcon from "@public/icons/twitter.svg";
 import googleIcon from "@public/icons/google.svg";
+import twitterIcon from "@public/icons/twitter.svg";
+import logo from "@public/logo.png";
 
 const GROUPS = [
   {
@@ -83,7 +83,7 @@ export default function PageFooter() {
           </div>
         </div>
 
-        <div className="text-blueSmoke py-2 text-center">
+        <div className="py-2 text-center text-blueSmoke">
           &copy; {year} Manual. All rights reserverd
         </div>
       </div>

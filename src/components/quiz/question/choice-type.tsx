@@ -1,7 +1,7 @@
-import { QuizOptionMap } from "@/api/fetchQuiz";
+import { CommonOptionProps } from "./types";
 import { useId } from "react";
 
-import { CommonOptionProps } from "./types";
+import { QuizOptionMap } from "@/api/fetchQuiz";
 
 interface ChoiceTypeQuestionProps extends CommonOptionProps {
   option: QuizOptionMap["ChoiceType"];

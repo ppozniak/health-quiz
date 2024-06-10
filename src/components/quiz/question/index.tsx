@@ -1,9 +1,10 @@
 "use client";
-import { QuestionType, QuizQuestion } from "@/api/fetchQuiz";
-import { FC, useMemo } from "react";
 
 import { ChoiceTypeOption } from "./choice-type";
 import { CommonOptionProps } from "./types";
+import { FC, useMemo } from "react";
+
+import { QuestionType, QuizQuestion } from "@/api/fetchQuiz";
 
 const QUESTION_TYPE_TO_OPTION_COMPONENT: Record<
   QuestionType,

@@ -1,6 +1,5 @@
-import Image, { ImageProps } from "next/image";
-
 import "./styles.css";
+import Image, { ImageProps } from "next/image";
 
 export type SectionListItem = {
   title: string;
@@ -33,10 +32,10 @@ export default function SectionList({ items }: SectionListProps) {
             </div>
 
             <div className="max-w-prose text-balance">
-              <h3 className="text-blueSmoke section-list__title mb-2 text-xs uppercase">
+              <h3 className="section-list__title mb-2 text-xs uppercase text-blueSmoke">
                 {title}
               </h3>
-              <p className="text-md mb-2">{heading}</p>
+              <p className="mb-2 text-md">{heading}</p>
               <p className="">{description}</p>
             </div>
           </div>
