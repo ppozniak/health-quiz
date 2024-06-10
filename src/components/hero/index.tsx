@@ -1,12 +1,12 @@
 import Link, { LinkProps } from "next/link";
-import React, { HTMLProps, ReactElement } from "react";
+import React, { HTMLProps, ReactNode } from "react";
 
 export type HeroProps = HTMLProps<HTMLDivElement> & {
   title: string;
   description: string;
   ctaTitle?: string;
   ctaHref?: LinkProps["href"];
-  children?: ReactElement;
+  children?: ReactNode;
 };
 
 export default function Hero({
@@ -20,7 +20,7 @@ export default function Hero({
   // @TODO: Merging styles
   return (
     <section
-      className="bg-olive overflow-hidden lg:-mt-4 lg:flex lg:min-h-[750px] lg:flex-col"
+      className="overflow-hidden bg-olive lg:-mt-4 lg:flex lg:min-h-[750px] lg:flex-col"
       {...rest}
     >
       <div className="container lg:flex lg:flex-1">

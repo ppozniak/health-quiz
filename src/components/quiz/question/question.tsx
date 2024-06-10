@@ -1,6 +1,6 @@
 "use client";
 import { QuestionType, QuizQuestion } from "@/api/fetchQuiz";
-import { FC, ReactElement, useState } from "react";
+import { FC } from "react";
 
 import { ChoiceTypeOption } from "./choice-type";
 
