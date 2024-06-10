@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Quiz } from "@/api/fetchQuiz";
+import { getRejectionFromAnswers } from "@/utils/quiz";
 
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const router = useRouter();
+  // @TODO: Separate hook for that?
   const [currentStep, setCurrentStep] = useState<"QUESTION" | "FINISH">(
     "QUESTION",
   );
@@ -19,20 +21,9 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const isLastQuestion = activeQuestionIndex === quiz.questions.length - 1;
   const isValueSelected = !!answers[activeQuestionIndex];
 
-  // @TODO: This now assumes that all quizes will rely on isRejected
-  // @TODO: Would be nice to write a test for that
   const handleFinish = () => {
-    const questionAnswers = answers.map((answer, index) => {
-      const options = quiz.questions[index].options;
-      const selectedOption = options.find(
-        (option) => String(option.value) === answer,
-      );
-
-      return selectedOption;
-    });
-
-    const hasRejection = questionAnswers.some((answer) => answer?.isRejection);
-
+    // @TODO: This assumes all quizzes use `isRejection` as a way to resolve quiz's outcome
+    const hasRejection = getRejectionFromAnswers(answers, quiz);
     setIsRejected(hasRejection);
     setCurrentStep("FINISH");
   };
