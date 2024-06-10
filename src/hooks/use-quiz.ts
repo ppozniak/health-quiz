@@ -8,7 +8,8 @@ export function useQuiz(quiz: Quiz) {
 
   const isFirstQuestion = activeQuestionIndex === 0;
   const isLastQuestion = activeQuestionIndex === quiz.questions.length - 1;
-  const isValueSelected = !!answers[activeQuestionIndex];
+  const currentAnswer = answers[activeQuestionIndex];
+  const currentQuestion = quiz.questions[activeQuestionIndex];
 
   const addAnswer = (index: number, value: string) => {
     setAnswers((answers) => {
@@ -32,7 +33,8 @@ export function useQuiz(quiz: Quiz) {
     addAnswer,
     isFirstQuestion,
     isLastQuestion,
-    isValueSelected,
+    currentAnswer,
+    currentQuestion,
     nextQuestion,
     previousQuestion,
   };

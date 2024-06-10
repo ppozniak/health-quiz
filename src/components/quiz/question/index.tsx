@@ -24,13 +24,10 @@ export function Question({
   onSelect,
   question: { question, options, type },
 }: QuestionProps) {
-  const OptionComponent = useMemo(
-    () => QUESTION_TYPE_TO_OPTION_COMPONENT[type],
-    [type],
-  );
+  const OptionComponent = QUESTION_TYPE_TO_OPTION_COMPONENT[type];
 
   return (
-    <div>
+    <div className="animate-fade-in" key={question}>
       <h1 className="mb-2 text-md">{question}</h1>
       {options.map((option, index) => (
         <OptionComponent

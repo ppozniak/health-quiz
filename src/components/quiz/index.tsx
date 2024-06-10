@@ -14,11 +14,12 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
     answers,
     isFirstQuestion,
     isLastQuestion,
-    isValueSelected,
     addAnswer,
+    currentAnswer,
     nextQuestion,
     previousQuestion,
     activeQuestionIndex,
+    currentQuestion,
   } = useQuiz(quiz);
 
   const [currentStep, setCurrentStep] = useState<"QUESTION" | "FINISH">(
@@ -58,13 +59,11 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
   return (
     <div className="container py-3">
       {currentStep === "QUESTION" && (
-        <div className="animate-fade-in" key={activeQuestionIndex}>
-          <Question
-            value={answers[activeQuestionIndex]}
-            onSelect={handleSelectAnswer}
-            question={quiz.questions[activeQuestionIndex]}
-          />
-        </div>
+        <Question
+          value={currentAnswer}
+          onSelect={handleSelectAnswer}
+          question={currentQuestion}
+        />
       )}
 
       {currentStep === "FINISH" && (
@@ -102,7 +101,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
         {currentStep === "QUESTION" && (
           <button
             className="btn-primary"
-            disabled={!isValueSelected}
+            disabled={!currentAnswer}
             onClick={handleNextClick}
           >
             {isLastQuestion ? "Finish" : "Next"}
