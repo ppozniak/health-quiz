@@ -8,10 +8,12 @@ import { Quiz } from "@/api/fetchQuiz";
 
 export function QuizFlow({ quiz }: { quiz: Quiz }) {
   const router = useRouter();
+  const [currentStep, setCurrentStep] = useState<"QUESTION" | "FINISH">(
+    "QUESTION",
+  );
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
-  // @TODO: Not sure about isRejected = undefined
-  const [isRejected, setIsRejected] = useState<boolean | undefined>();
+  const [isRejected, setIsRejected] = useState(false);
 
   const isFirstQuestion = activeQuestionIndex === 0;
   const isLastQuestion = activeQuestionIndex === quiz.questions.length - 1;
@@ -32,17 +34,14 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
     const hasRejection = questionAnswers.some((answer) => answer?.isRejection);
 
     setIsRejected(hasRejection);
-  };
-
-  const resetOutcome = () => {
-    setIsRejected(undefined);
+    setCurrentStep("FINISH");
   };
 
   const handlePrevious = () => {
     if (isFirstQuestion) {
       router.back();
-    } else if (isRejected !== undefined) {
-      resetOutcome();
+    } else if (currentStep === "FINISH") {
+      setCurrentStep("QUESTION");
     } else {
       setActiveQuestionIndex((active) => active - 1);
     }
@@ -70,7 +69,7 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
 
   return (
     <div className="container py-3">
-      {isRejected === undefined && (
+      {currentStep === "QUESTION" && (
         <div className="animate-fade-in" key={activeQuestionIndex}>
           <Question
             value={answers[activeQuestionIndex]}
@@ -80,35 +79,38 @@ export function QuizFlow({ quiz }: { quiz: Quiz }) {
         </div>
       )}
 
-      {isRejected === true && (
-        <div className="max-w-prose">
-          Unfortunately, we are unable to prescribe this medication for you.
-          This is because finasteride can alter the PSA levels, which may be
-          used to monitor for cancer. You should discuss this further with your
-          GP or specialist if you would still like this medication.
+      {currentStep === "FINISH" && (
+        <div className="max-w-prose animate-fade-in">
+          {isRejected ? (
+            <>
+              Unfortunately, we are unable to prescribe this medication for you.
+              This is because finasteride can alter the PSA levels, which may be
+              used to monitor for cancer. You should discuss this further with
+              your GP or specialist if you would still like this medication.
+            </>
+          ) : (
+            <>
+              Great news! We have the perfect treatment for your hair loss.
+              Proceed to{" "}
+              <a
+                href="http://www.example.com"
+                target="_blank"
+                className="underline"
+              >
+                www.example.com
+              </a>
+              , and prepare to say hello to your new hair!
+            </>
+          )}
         </div>
       )}
 
-      {isRejected === false && (
-        <div>
-          Great news! We have the perfect treatment for your hair loss. Proceed
-          to{" "}
-          <a
-            href="http://www.example.com"
-            target="_blank"
-            className="underline"
-          >
-            www.example.com
-          </a>
-          , and prepare to say hello to your new hair!
-        </div>
-      )}
-
-      <div className="mt-2 flex justify-between">
+      <div className="mt-2 flex justify-between md:justify-start md:gap-2">
         <button className="btn-secondary" onClick={handlePrevious}>
           {isFirstQuestion ? "Exit" : "Previous"}
         </button>
-        {isRejected === undefined && (
+
+        {currentStep === "QUESTION" && (
           <button
             className="btn-primary"
             disabled={!isValueSelected}
